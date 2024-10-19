@@ -1,5 +1,5 @@
-# This is as minimal as possible.
-{ config, lib, pkgs, modulesPath, ... }:
+# hardware specific
+{ lib, pkgs, modulesPath, ... }:
 
 {
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
@@ -12,10 +12,11 @@
     kernelParams = [ ];
     kernelPackages = pkgs.linuxPackages;
     extraModulePackages = [ ];
+    zfs.forceImportRoot = false;
 
     initrd = {
       kernelModules = [ ];
-      availableKernelModules = [ "zfs" "ext4" "vfat" "ahci" "nvme" "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
+      availableKernelModules = [ "zfs" "ext4" "vfat" "ahci" "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
       # enable filesystems and usb/sd or it probably won't boot
       supportedFilesystems = [ "ext4" "vfat" "zfs" ];
     };

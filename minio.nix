@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   services.minio = {
-    enable = "";
+    enable = true;
 
     #package = "";
     region = "us-az-nutrioso";

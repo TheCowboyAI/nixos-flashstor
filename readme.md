@@ -79,16 +79,32 @@ We want to setup replication to a cloud provider. We chose [Wasabi](https://wasa
 This flake sets all the required inputs.
 
 ## configuration.nix
-Flashstor configuration settings
+Flashstor configuration modules enabled
 
 ## hardware-configuration.nix
-Flashstor hardware specific settings
+Flashstor hardware specific module
 
-## minio.nix
-MinIO Configuration
+## networking.nix
+Network specific settings
+
+## packages.nix
+Packages to include
+Packages have no included NixOS configuration settings
+These are ready for use, but should be modularized as significant convifuration may be required
+
+## programs.nix
+NixOS Programs to include
+These programs have specified options and conversions already enabled as a module in NixOS
+
+## services.nix
+NixOS Services to include
+These services have specified options and conversions already enabled as a module in NixOS
 
 ## disko.nix
-Disk Layout
-
+Disk Layout module
+This sample uses a system disk and a zpool for all the M2 SSDs
 ## users.nix
-User spcific settings, root passwords, etc.
+User specific settings module, root passwords, etc.
+
+## minio.nix
+MinIO specific settings module
