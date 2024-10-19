@@ -18,6 +18,7 @@
 
     # enable firewall and block all ports
     firewall.enable = true;
+    # we will be using the default port
     firewall.allowedTCPPorts = [ 22 8000 8001 ];
     firewall.allowedUDPPorts = [ ];
   };
