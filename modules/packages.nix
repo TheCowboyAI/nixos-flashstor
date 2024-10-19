@@ -2,7 +2,6 @@
 {
   # System packages
   environment.systemPackages = with pkgs; [
-    nmtui
     cryptsetup
     git
     just
@@ -15,6 +14,6 @@
     openssh
     age-plugin-yubikey
     piv-agent
-    (import ./test-flashstor.nix { inherit pkgs; })
+    (import ../tests/test-flashstor.nix { inherit pkgs; })
   ];
 }

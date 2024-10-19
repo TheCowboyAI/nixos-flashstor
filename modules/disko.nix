@@ -46,52 +46,52 @@
     };
   };
 
-  # this is enabled after booting
+  # # this is enabled after booting
 
-  data = {
-    vda = {
-      device = "/dev/vda";
-      # everything below should be identical on all drives in a pool
-      type = "disk";
-      content = {
-        type = "gpt";
-        partitions = {
-          zfs = {
-            size = "100%";
-            content = {
-              type = "zfs";
-              pool = "zdata";
-            };
-          };
-        };
-      };
-    };
+  # data = {
+  #   vda = {
+  #     device = "/dev/vda";
+  #     # everything below should be identical on all drives in a pool
+  #     type = "disk";
+  #     content = {
+  #       type = "gpt";
+  #       partitions = {
+  #         zfs = {
+  #           size = "100%";
+  #           content = {
+  #             type = "zfs";
+  #             pool = "zdata";
+  #           };
+  #         };
+  #       };
+  #     };
+  #   };
 
-    zdata = {
-      type = "zpool";
-      mode = "raidz2";
-      rootFsOptions = {
-        compression = "zstd";
-        "com.sun:auto-snapshot" = "false";
-      };
-      mountpoint = "/zdata";
+  #   zdata = {
+  #     type = "zpool";
+  #     mode = "raidz2";
+  #     rootFsOptions = {
+  #       compression = "zstd";
+  #       "com.sun:auto-snapshot" = "false";
+  #     };
+  #     mountpoint = "/zdata";
 
-      datasets = {
-        zfs_fs = {
-          type = "zfs_fs";
-          mountpoint = "/zfs_fs";
-        };
-        zfs_testvolume = {
-          type = "zfs_volume";
-          size = "10M";
-          content = {
-            type = "filesystem";
-            format = "ext4";
-            mountpoint = "/ext4onzfs";
-          };
-        };
-      };
-    };
-  };
+  #     datasets = {
+  #       zfs_fs = {
+  #         type = "zfs_fs";
+  #         mountpoint = "/zfs_fs";
+  #       };
+  #       zfs_testvolume = {
+  #         type = "zfs_volume";
+  #         size = "10M";
+  #         content = {
+  #           type = "filesystem";
+  #           format = "ext4";
+  #           mountpoint = "/ext4onzfs";
+  #         };
+  #       };
+  #     };
+  #   };
+  # };
 }
 

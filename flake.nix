@@ -13,7 +13,7 @@
         system = "x86_64-linux";
         modules = [
           disko.nixosModules.disko
-          ./disko.nix
+          ./modules/disko.nix
           ./configuration.nix
         ];
       };

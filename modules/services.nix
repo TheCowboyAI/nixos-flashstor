@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, ... }:
 {
   services = {
     openssh.enable = lib.mkForce true;
