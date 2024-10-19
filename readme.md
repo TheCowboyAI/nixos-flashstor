@@ -42,14 +42,18 @@ This "flake" IS the installer.
 We will be using both [Disko](https://github.com/nix-community/disko) and [nixos-anywhere](https://github.com/nix-community/nixos-anywhere) to accomplish our goal. Once we have NixOS running on the Flashstor, updates are simply done with "nixos-rebuild switch" using the switch for a remote machine. We include a justfile for all these commands, i.e. just rebuild... just makeiso... just installiso /dev/sda
 
 The Machine:
-  x86 (using intell Quad Core Celeron - N5105)
-  4Gb RAM (you want to upgrade this for better caching)
-  hdmi out for video
-  ethernet card
-  usb for keyboard
+  - x86 (using intell Quad Core Celeron - N5105)
+  - 4Gb RAM (you want to upgrade this for better caching)
+    - Technically, the cpu only supports 16G, but it has been tested as working with 64
+  - hdmi out for video
+  - ethernet card
+  - usb for keyboard
+  - usb bootable
+  - eMMC bootable
+  - (probably network bootable, we will look into that in a later version)
 
 So in effect, NixOS, sees this as any other x86 machine.
-We just need to tune it for things like Power Management, Network, etc.
+We just need to tune it for things like Power Management, Network, Disks, eMMC, etc.
 
 Disko lets us configure the drive layout, we have:
 

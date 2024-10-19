@@ -10,13 +10,13 @@
   imports =
     [
       "${modulesPath}/profiles/hardened.nix"
-      ./hardware-configuration.nix
-      ./networking.nix
-      ./packages.nix
-      ./services.nix
-      ./programs.nix
-      ./users.nix
-      ./minio.nix
+      ../modules/hardware-configuration.nix
+      ../modules/networking.nix
+      ../modules/packages.nix
+      ../modules/services.nix
+      ../modules/programs.nix
+      ../modules/users.nix
+      ../modules/minio.nix
     ];
 
 }
