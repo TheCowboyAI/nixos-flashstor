@@ -2,6 +2,7 @@
 {
   # System packages
   environment.systemPackages = with pkgs; [
+    nvme-cli
     cryptsetup
     git
     just

@@ -14,7 +14,11 @@
     wireless.enable = false;
     
     # we should have a fixed IP
-    interfaces = { };
+    interfaces = { 
+      enp1s0 = {
+        # TODO
+      };
+    };
 
     # enable firewall and block all ports
     firewall.enable = true;

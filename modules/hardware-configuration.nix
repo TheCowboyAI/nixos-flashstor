@@ -15,7 +15,24 @@
 
     initrd = {
       kernelModules = [ ];
-      availableKernelModules = [ "zfs" "ext4" "vfat" "ahci" "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
+      # we probably don't need all these really...
+      availableKernelModules = [
+        "zfs"
+        "ext4"
+        "vfat"
+        "ahci"
+        "xhci_pci"
+        "sdhci_acpi"
+        "thunderbolt"
+        "nvme"
+        "usb_storage"
+        "sd_mod"
+        "sr_mod"
+        "rtsx_pci_sdmmc"
+        "ehci_hcd"
+        "uhci_hcd"
+        "mmc_block"
+      ];
       # enable filesystems and usb/sd or it probably won't boot
       supportedFilesystems = [ "ext4" "vfat" "zfs" ];
     };

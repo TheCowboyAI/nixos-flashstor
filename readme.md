@@ -7,6 +7,13 @@ Having a solution to pre-configure our storage solutions and tune them specifica
 
 Nix is how we intend to do this of course.
 
+## The License Thing...
+There is an ongoing license dispute over zfs and the linux kernel... If this make you extremely uncomfortable, we have a solution.
+
+There is a [branch](https://github.com/thecowboyai/nixos-flashstor/tree/nixbsd) of this repository running everything on [NixBSD](https://github.com/nixos-bsd/nixbsd).
+
+When we determine it to be completely stable we will merge it into the main branch as a configurable option.
+
 ## Flashstor 12
 This is a network appliance.
 

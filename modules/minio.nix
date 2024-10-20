@@ -10,10 +10,17 @@
     listenAddress = "0.0.0.0";
     #consoleAddress = "";
     #configDir = "";
-    #dataDir = "";
+    dataDir = "/zdata";
 
     #secretKey = "";
-    #rootCredentialsFile = "";
     #accessKey = "";
+
+    #rootCredentialsFile = "/etc/nixos/minio-root-credentials";
+    # alternatively, we set these env vars
+  };
+
+  environment.variables = {
+    MINIO_ROOT_USER = "admin";
+    MINIO_ROOT_PASSWORD = "admin";
   };
 }
