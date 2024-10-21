@@ -1,6 +1,8 @@
 # NixOS Configuration for Asus Flashstor FS6712X
 Provide reliable Network Attached Storage as a deterministic solution.
 
+## **CAUTION** - This is not yet considered stable, it will destroy data
+
 If I buy more storage devices, I want to configure them prior to adding them to the network for general use.
 
 Having a solution to pre-configure our storage solutions and tune them specifically to our needs is important.
@@ -40,7 +42,7 @@ If we want to add anything, such as Grafana we can do that in a NixOS Module and
 
 Instead of simply flashing the eMMC, we want to be able to test the system before use.  We also want to backup the current system before overwriting it.
 
-We will create an ISO that we place onto a bootable USB device and test the system before flashing the eMMC. This can also be tested in a VM, but not very well, just to see the system and not the drives.
+We will create an ISO that we place onto a bootable USB device and test the system before flashing the eMMC. This can also be tested in a VM, we can emulate the system and see the drives gather into a zpool.
 
 The ISO will be a fully installed system, not an installer we need to run. (though it will let you populate and backup the eMMC)
 
@@ -49,7 +51,7 @@ This "flake" IS the installer.
 We will be using both [Disko](https://github.com/nix-community/disko) and [nixos-anywhere](https://github.com/nix-community/nixos-anywhere) to accomplish our goal. Once we have NixOS running on the Flashstor, updates are simply done with "nixos-rebuild switch" using the switch for a remote machine. We include a justfile for all these commands, i.e. just rebuild... just makeiso... just installiso /dev/sda
 
 The Machine:
-  - x86 (using intell Quad Core Celeron - N5105)
+  - x86 (using Intel Quad Core Celeron - N5105)
   - 4Gb RAM (you want to upgrade this for better caching)
     - Technically, the cpu only supports 16G, but it has been tested as working with 64
   - hdmi out for video
@@ -57,7 +59,7 @@ The Machine:
   - usb for keyboard
   - usb bootable
   - eMMC bootable
-  - (probably network bootable, we will look into that in a later version)
+  - network bootable, we will look into that in a later version
 
 So in effect, NixOS, sees this as any other x86 machine.
 We just need to tune it for things like Power Management, Network, Disks, eMMC, etc.
@@ -72,14 +74,15 @@ Disko lets us configure the drive layout, we have:
 - eMMC
   - eMMC Flash Storage for the OS (currently occupied by Asus Software)
 
-These are all setup in normal Nix files.
+These are all setup in normal Nix files as modules.
 
 We will boot from USB and assign available drives using [openZFS](https://openzfs.org/wiki/Main_Page)
 
 We also install [MinIO](https://min.io/) to support Object Stores (S3) and Kubernetes operator integration.
-This is already available as a service in NixOS.
 
-We want to setup replication to a cloud provider. We chose [Wasabi](https://wasabi.com/), but any Block Storage Provider work with by changing the configuration.
+MinIO is already available as a service in NixOS.
+
+We want to setup replication to a cloud provider. We chose [Wasabi](https://wasabi.com/), but any Block Storage Provider works by changing the configuration.
 
 ## flake.nix
 This flake sets all the required inputs.
@@ -109,6 +112,7 @@ These services have specified options and conversions already enabled as a modul
 ## disko.nix
 Disk Layout module
 This sample uses a system disk and a zpool for all the M2 SSDs
+
 ## users.nix
 User specific settings module, root passwords, etc.
 

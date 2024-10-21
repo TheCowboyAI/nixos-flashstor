@@ -11,8 +11,9 @@
     kernelParams = [ ];
     kernelPackages = pkgs.linuxPackages;
     extraModulePackages = [ ];
-    zfs.forceImportRoot = false;
-
+    zfs.forceImportRoot = true;
+    zfs.extraPools = [ "zdata" ];
+    
     initrd = {
       kernelModules = [ ];
       # we probably don't need all these really...

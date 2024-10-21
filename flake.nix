@@ -13,7 +13,8 @@
         system = "x86_64-linux";
         modules = [
           disko.nixosModules.disko
-          ./modules/disko.nix
+          ./modules/disko-sysboot.nix
+          #./modules/disko-nas.nix
           ./configuration.nix
         ];
       };

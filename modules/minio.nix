@@ -10,7 +10,7 @@
     listenAddress = "0.0.0.0";
     #consoleAddress = "";
     #configDir = "";
-    dataDir = "/zdata";
+    #dataDir = "/zdata";
 
     #secretKey = "";
     #accessKey = "";

@@ -1,6 +1,6 @@
 { lib, pkgs, ... }:
 {
-    networking = {
+  networking = {
     hostName = "minio";
     # we REQUIRE this for zfs 
     # 8 hexadecimal chars, unique in the network
@@ -12,11 +12,17 @@
     useNetworkd = true;
     networkmanager.enable = true;
     wireless.enable = false;
-    
+
     # we should have a fixed IP
-    interfaces = { 
+    interfaces = {
       enp1s0 = {
-        # TODO
+        useDHCP = false;
+        ipv4.addresses = [
+          {
+            address = "172.16.0.2";
+            prefixLength = 30;
+          }
+        ];
       };
     };
 

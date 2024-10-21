@@ -3,6 +3,8 @@
   # System packages
   environment.systemPackages = with pkgs; [
     nvme-cli
+    tpm2-tools
+    tpm2-tss
     cryptsetup
     git
     just
