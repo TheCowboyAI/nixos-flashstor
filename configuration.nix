@@ -1,4 +1,4 @@
-{ modulesPath, ... }:
+{ modulesPath, self, ... }:
 {
   system.stateVersion = "24.05";
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -8,7 +8,9 @@
 
   imports =
     [
+      #self.inputs.disko.nixosModules.disko
       "${modulesPath}/profiles/hardened.nix"
+      ./modules/disko-nas.nix
       ./modules/hardware-configuration.nix
       ./modules/networking.nix
       ./modules/packages.nix

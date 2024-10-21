@@ -11,10 +11,10 @@
     nixosConfigurations = {
       nixos-flashstor = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = { inherit self; };
         modules = [
-          disko.nixosModules.disko
+          disko.nixosModules.disko 
           ./modules/disko-sysboot.nix
-          #./modules/disko-nas.nix
           ./configuration.nix
         ];
       };
