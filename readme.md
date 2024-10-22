@@ -118,3 +118,16 @@ User specific settings module, root passwords, etc.
 
 ## minio.nix
 MinIO specific settings module
+
+
+# Installation
+create a network port to access 172.16.0.2
+plug in the flashstor to this port
+execute just build to a usb device at least 16GB
+plug the usb device into the flashstor
+turn on the flashstor and boot to usb
+ping 172.16.0.2
+execute just deploy
+this will install the system to /dev/sda, the usb device (which it will overwrite) and create the zpool with the 12 drives
+test the deployment
+see if you can reach https://172.16.0.2:9001

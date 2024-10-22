@@ -14,7 +14,6 @@
     pinentry-curses
     pwgen
     gpg-tui
-    openssh
     age-plugin-yubikey
     piv-agent
     (import ../tests/test-flashstor.nix { inherit pkgs; })

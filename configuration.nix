@@ -10,7 +10,6 @@
     [
       #self.inputs.disko.nixosModules.disko
       "${modulesPath}/profiles/hardened.nix"
-      ./modules/disko-nas.nix
       ./modules/hardware-configuration.nix
       ./modules/networking.nix
       ./modules/packages.nix

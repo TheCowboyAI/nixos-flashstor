@@ -13,6 +13,17 @@
     networkmanager.enable = true;
     wireless.enable = false;
 
+    # we need an SSL Certificate
+
+
+    defaultGateway = {
+      address = "172.16.0.1";
+      interface = "enp1s0";
+    };
+
+
+    nameservers = [ "192.168 .1 .254" "1.1 .1 .1" ];
+
     # we should have a fixed IP
     interfaces = {
       enp1s0 = {
@@ -20,7 +31,7 @@
         ipv4.addresses = [
           {
             address = "172.16.0.2";
-            prefixLength = 30;
+            prefixLength = 24;
           }
         ];
       };
