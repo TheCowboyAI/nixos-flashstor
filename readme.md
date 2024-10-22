@@ -50,11 +50,14 @@ This "flake" IS the installer.
 
 We will be using both [Disko](https://github.com/nix-community/disko) and [nixos-anywhere](https://github.com/nix-community/nixos-anywhere) to accomplish our goal. Once we have NixOS running on the Flashstor, updates are simply done with "nixos-rebuild switch" using the switch for a remote machine. We include a justfile for all these commands, i.e. just rebuild... just makeiso... just installiso /dev/sda
 
+The are also maintenance scripts available for the eMMC, and output to a screen/audio.
+
 The Machine:
   - x86 (using Intel Quad Core Celeron - N5105)
   - 4Gb RAM (you want to upgrade this for better caching)
     - Technically, the cpu only supports 16G, but it has been tested as working with 64
   - hdmi out for video
+  - audio out
   - ethernet card
   - usb for keyboard
   - usb bootable
@@ -99,19 +102,19 @@ Network specific settings
 ## packages.nix
 Packages to include
 Packages have no included NixOS configuration settings
-These are ready for use, but should be modularized as significant convifuration may be required
+These are ready for use, but should be modularized as significant configuration may be required, adding it as a module helps keep components organized.
 
 ## programs.nix
 NixOS Programs to include
-These programs have specified options and conversions already enabled as a module in NixOS
+These programs have specified [options](https://search.nixos.org/options?channel=unstable&from=0&size=50&sort=alpha_asc&type=packages&query=programs.) and conversions already enabled as a module in NixOS
 
 ## services.nix
 NixOS Services to include
-These services have specified options and conversions already enabled as a module in NixOS
+These [services](https://search.nixos.org/options?channel=unstable&from=0&size=50&sort=alpha_asc&type=packages&query=services.) have specified options and conversions already enabled as a module in NixOS
 
 ## disko.nix
-Disk Layout module
-This sample uses a system disk and a zpool for all the M2 SSDs
+[disko](https://github.com/nix-community/disko) Disk Layout module
+This sample uses a system disk and a zpool for all the M2 SSDs, it will install to a USB device, and has the command-line option to backup or write our image to the eMMC
 
 ## users.nix
 User specific settings module, root passwords, etc.
@@ -119,15 +122,37 @@ User specific settings module, root passwords, etc.
 ## minio.nix
 MinIO specific settings module
 
-
 # Installation
-create a network port to access 172.16.0.2
-plug in the flashstor to this port
-execute just build to a usb device at least 16GB
-plug the usb device into the flashstor
-turn on the flashstor and boot to usb
-ping 172.16.0.2
-execute just deploy
-this will install the system to /dev/sda, the usb device (which it will overwrite) and create the zpool with the 12 drives
-test the deployment
-see if you can reach https://172.16.0.2:9001
+
+This is the tested process.
+
+1.  boot to a non-gui nixos installer image (or the iso here)
+    -  we want to avoid kexec when running nixos-anywhere
+    -  to make an image, execute ```just build``` with a usb device of at least 16GB (so we can backup the 8G eMMC)
+2.  set the network IPs (172.16.0.2)
+    -  we want a fixed ip, you may want it in a secured dmz.
+3.  create a network port to access 172.16.0.2 from your installation device
+    -  plug in the flashstor network into this port
+4.  plug the usb device into the flashstor
+5.  turn on the flashstor and boot to usb  
+    - if you pluggeed in a keyboard and monitor, you can see it boot
+    - hit F2 on boot to see the BIOS Menu
+    - set boot the usb first
+6.  ping 172.16.0.2
+    -  you need to be able to access this device
+7.  on the build device:
+    - execute ```just deploy```
+    - this will install the system to /dev/sda, the usb device (which it will overwrite) and create a zpool with the 12 drives, ready for MinIO.
+8.  test the deployment
+    - execute ```just test```  
+    - see if you can reach MinIO at https://172.16.0.2:9001
+9.  if satisfied with the deployment:
+    1.  backup eMMC (optional)
+        - execute ```backup-emmc```
+    2.  write to eMMC (optional)
+        - execute ```install-emmc```
+    3.  reboot
+    4.  hit F2 on boot to see the BIOS Menu
+        - set boot the eMMC first
+10. reboot into working system
+
