@@ -24,8 +24,8 @@
       };
     in
     {
-      # not dry, but looping this is really weird in nix
-      # comment out any unpopulated drives
+      # comment out any unpopulated drives, or nixos-anywhere will fail
+      # here we show only 8 drives populated
       disk = {
          nvme0n1 = drive { devicePath =  "/dev/nvme0n1"; poolName = "zroot"; };
          nvme1n1 = drive { devicePath =  "/dev/nvme1n1"; poolName = "zroot"; };
@@ -35,10 +35,10 @@
          nvme5n1 = drive { devicePath =  "/dev/nvme5n1"; poolName = "zroot"; };
          nvme6n1 = drive { devicePath =  "/dev/nvme6n1"; poolName = "zroot"; };
          nvme7n1 = drive { devicePath =  "/dev/nvme7n1"; poolName = "zroot"; };
-         nvme8n1 = drive { devicePath =  "/dev/nvme8n1"; poolName = "zroot"; };
-         nvme9n1 = drive { devicePath =  "/dev/nvme9n1"; poolName = "zroot"; };
-        nvme10n1 = drive { devicePath = "/dev/nvme10n1"; poolName = "zroot"; };
-        nvme11n1 = drive { devicePath = "/dev/nvme11n1"; poolName = "zroot"; };
+        #  nvme8n1 = drive { devicePath =  "/dev/nvme8n1"; poolName = "zroot"; };
+        #  nvme9n1 = drive { devicePath =  "/dev/nvme9n1"; poolName = "zroot"; };
+        # nvme10n1 = drive { devicePath = "/dev/nvme10n1"; poolName = "zroot"; };
+        # nvme11n1 = drive { devicePath = "/dev/nvme11n1"; poolName = "zroot"; };
         #sda = drive { devicePath = "/dev/sda"; poolName = "zroot"; }; # Adding USB drive if needed
       };
 
