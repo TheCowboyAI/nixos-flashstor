@@ -1,7 +1,7 @@
 # NixOS Configuration for Asus Flashstor FS6712X
 Provide reliable Network Attached Storage as a deterministic solution.
 
-## **CAUTION** - This is not yet considered stable, it will destroy data
+## **CAUTION** - This will destroy data
 
 If I buy more storage devices, I want to configure them prior to adding them to the network for general use.
 
@@ -129,11 +129,14 @@ This is the tested process.
 1.  boot to a non-gui nixos installer image (or the iso here)
     -  we want to avoid kexec when running nixos-anywhere
     -  to make an image, execute ```just build``` with a usb device of at least 16GB (so we can backup the 8G eMMC)
+    -  we ALSO need a second device (/dev/sdb) in install to
+    -  because we can't overwite a mounted drive.
+    -  we could decide to [install straight to eMMC](installtoemmc.md)
 2.  set the network IPs (172.16.0.2)
     -  we want a fixed ip, you may want it in a secured dmz.
 3.  create a network port to access 172.16.0.2 from your installation device
     -  plug in the flashstor network into this port
-4.  plug the usb device into the flashstor
+4.  plug the usb device(s) into the flashstor
 5.  turn on the flashstor and boot to usb  
     - if you pluggeed in a keyboard and monitor, you can see it boot
     - hit F2 on boot to see the BIOS Menu
@@ -143,16 +146,40 @@ This is the tested process.
 7.  on the build device:
     - execute ```just deploy```
     - this will install the system to /dev/sda, the usb device (which it will overwrite) and create a zpool with the 12 drives, ready for MinIO.
-8.  test the deployment
+8.  
+9.  test the deployment
     - execute ```just test```  
     - see if you can reach MinIO at https://172.16.0.2:9001
-9.  if satisfied with the deployment:
+10.  if satisfied with the deployment:
     1.  backup eMMC (optional)
-        - execute ```backup-emmc```
-    2.  write to eMMC (optional)
-        - execute ```install-emmc```
+        - execute ```backup-emmc``` on the NAS
     3.  reboot
-    4.  hit F2 on boot to see the BIOS Menu
-        - set boot the eMMC first
-10. reboot into working system
+    4.  hit F2 on boot to see the BIOS Menu, or in the NixOS menu choose boot to firmware
+        - set boot the eMMC to writable
+    5. reboot
+    6. execute ```just deploy```
+    7. set eMMC to be first in boot order
+    8.  reboot into working system
+    9.  store your drives somewhere safe, or overwrite them as they contain sensitive information.
 
+# Maintenance
+to updatre the system, change the repository item, comit them and execute ```just rebuild```
+
+this is just a wrapper for 
+```bash
+nixos-rebuild switch --flake .#nixos-flashstor --target-host root@172.16.0.2
+```
+
+## MinIO
+There are several things we want to do to MinIO
+
+We would like this do already be setup.
+editing minio.nix is the best way to achieve this.
+If we are experimenting, that is one thing, but if we need to rebuild, we should have a way to do so.
+
+Our technique is to have auto-replication set for Wasabi.
+This will mirror everything in the Object Stores to Wasabi and allow you to recover by reformatting the NAS and importing all the replicated Object Stores.
+
+**NOTE:** You don't want to do this often, it will take days to restore many TB of data, this is a disaster recovery option, not a regular workflow.
+
+## Wasabi Replication

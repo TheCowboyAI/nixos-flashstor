@@ -1,7 +1,7 @@
 {
   # This file is ONLY the NAS drives and is invoked on boot
   boot.zfs.forceImportRoot = true;
-  boot.zfs.extraPools = [ "zdata" ];
+  boot.zfs.extraPools = [ "zroot" ];
 
   disko.devices =
     let

@@ -4,6 +4,7 @@
     hostName = "minio";
     # we REQUIRE this for zfs 
     # 8 hexadecimal chars, unique in the network
+    # CHANGE THIS
     hostId = "9f7c98b3";
 
     useDHCP = lib.mkDefault true;
@@ -13,16 +14,13 @@
     networkmanager.enable = true;
     wireless.enable = false;
 
-    # we need an SSL Certificate
-
-
     defaultGateway = {
       address = "172.16.0.1";
       interface = "enp1s0";
     };
 
 
-    nameservers = [ "192.168 .1 .254" "1.1 .1 .1" ];
+    nameservers = [ "10.0.0.254" "1.1.1.1" ];
 
     # we should have a fixed IP
     interfaces = {

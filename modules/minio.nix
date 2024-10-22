@@ -19,6 +19,8 @@
     # alternatively, we set these env vars
   };
 
+  # we need an SSL Certificate for minio
+
   environment.variables = {
     MINIO_ROOT_USER = "admin";
     MINIO_ROOT_PASSWORD = "admin";
