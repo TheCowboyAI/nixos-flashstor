@@ -25,7 +25,7 @@
         specialArgs = { inherit self; };
         modules = [
           disko.nixosModules.disko 
-          ./modules/disko-sysboot-emmc.nix
+          ./modules/disko-emmcboot.nix
           ./modules/disko-nas.nix
           ./configuration.nix
         ];
@@ -44,7 +44,3 @@
     };
   };
 }
-
-# sudo nix run 'github:nix-community/disko#disko-install' -- --write-efi-boot-entries --flake .#nixos-flashstor-iso --disk sysboot /dev/sda
-# nix run github:nix-community/nixos-anywhere -- --flake .#nixos-flashstor root@172.16.0.2
-

@@ -13,7 +13,8 @@
       # this is aimed at USB as well as eMMC
       # we just copy it to eMMC when ready
       # this will become nixos on zfs root as well next iteration
-      sysboot = {
+      # name this different than sysboot or part-label gets confused when usb and emmc are both present
+      emmcboot = {
         # this should be the secondary usb or emmc
         device = "/dev/mmcblk0";
         type = "disk";
@@ -27,7 +28,7 @@
             };
             ESP = {
               type = "EF00";
-              size = "500M";
+              size = "512M";
               content = {
                 type = "filesystem";
                 format = "vfat";
