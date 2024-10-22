@@ -18,6 +18,16 @@
           ./modules/nixos-anywhere.nix
         ];
       };
+      nixos-flashstor-emmc = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit self; };
+        modules = [
+          disko.nixosModules.disko 
+          ./modules/disko-sysboot-emmc.nix
+          ./modules/disko-nas.nix
+          ./configuration.nix
+        ];
+      };
       nixos-flashstor = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit self; };

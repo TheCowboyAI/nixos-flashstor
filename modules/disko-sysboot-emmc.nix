@@ -14,7 +14,7 @@
       # this will become nixos on zfs root as well next iteration
       sysboot = {
         # this should be the secondary usb or emmc
-        device = "/dev/sda";
+        device = "/dev/mmcblk0";
         type = "disk";
         content = {
           type = "gpt";
