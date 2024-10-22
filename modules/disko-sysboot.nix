@@ -8,12 +8,8 @@
 
   disko.devices = {
     disk = {
-      # the bootable drive...
-      # this is aimed at USB as well as eMMC
-      # we just copy it to eMMC when ready
       # this will become nixos on zfs root as well next iteration
       sysboot = {
-        # this should be the secondary usb or emmc
         device = "/dev/sda";
         type = "disk";
         content = {

@@ -17,6 +17,7 @@
 
   imports =
     [
+      #"${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
       "${modulesPath}/profiles/hardened.nix"
       ./hardware-configuration.nix
       ./networking.nix

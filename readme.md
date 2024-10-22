@@ -154,7 +154,7 @@ This is the tested process.
     1.  backup eMMC (optional)
         - execute ```backup-emmc``` on the NAS
     3.  reboot
-    4.  hit F2 on boot to see the BIOS Menu, or in the NixOS menu choose boot to firmware
+    4.  hit F2 on boot to see the BIOS Menu, or in the NixOS menu choose `Boot into Firmware Interface`
         - set boot the eMMC to writable
     5. reboot
     6. execute ```just deploy```

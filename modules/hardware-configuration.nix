@@ -12,10 +12,10 @@
     kernelPackages = pkgs.linuxPackages;
     extraModulePackages = [ ];
 
-    
     initrd = {
       kernelModules = [ ];
-      # we probably don't need all these really...
+      # These are considerably more than the nix generator finds...
+      # nixos-facter may do better, but isn't necessary here.
       availableKernelModules = [
         "zfs"
         "ext4"
@@ -23,7 +23,6 @@
         "ahci"
         "xhci_pci"
         "sdhci_acpi"
-        "thunderbolt"
         "nvme"
         "usb_storage"
         "sd_mod"

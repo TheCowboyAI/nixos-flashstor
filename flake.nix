@@ -9,6 +9,7 @@
 
   outputs = { self, disko, nixpkgs, ... }@inputs: {
     nixosConfigurations = {
+      # to boot and allow nixos-anywhere
       nixos-flashstor-iso = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit self; };
@@ -18,6 +19,7 @@
           ./modules/nixos-anywhere.nix
         ];
       };
+      # for nixos-anywhere to the emmc, emmc has quirks
       nixos-flashstor-emmc = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit self; };
@@ -28,7 +30,8 @@
           ./configuration.nix
         ];
       };
-      nixos-flashstor = nixpkgs.lib.nixosSystem {
+      # for nixos-anywhere to a USB
+      nixos-flashstor-usb = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit self; };
         modules = [
