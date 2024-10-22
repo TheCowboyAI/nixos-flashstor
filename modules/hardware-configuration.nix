@@ -32,6 +32,7 @@
         "ehci_hcd"
         "uhci_hcd"
         "mmc_block"
+        "i915"
       ];
       # enable filesystems and usb/sd or it probably won't boot
       supportedFilesystems = [ "ext4" "vfat" "zfs" ];

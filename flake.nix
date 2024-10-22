@@ -15,7 +15,7 @@
         modules = [
           disko.nixosModules.disko 
           ./modules/disko-sysboot.nix
-          ./configuration.nix
+          ./modules/nixos-anywhere.nix
         ];
       };
       nixos-flashstor = nixpkgs.lib.nixosSystem {
