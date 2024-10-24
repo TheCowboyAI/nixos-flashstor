@@ -1,28 +1,22 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   services.minio = {
     enable = true;
 
-    #package = "";
     region = "us-az-nutrioso";
     browser = true;
 
-    listenAddress = "0.0.0.0";
-    #consoleAddress = "";
-    #configDir = "";
-    #dataDir = "/zdata";
+    listenAddress = "172.16.0.2";
+    
+    #point to a zpool
+    dataDir = [ "/zroot" ];
 
-    #secretKey = "";
-    #accessKey = "";
-
-    #rootCredentialsFile = "/etc/nixos/minio-root-credentials";
-    # alternatively, we set these env vars
+    rootCredentialsFile = "/etc/minio-root-credentials";
   };
 
+  environment.etc."minio-root-credentials" = {
+    mode = "0644";
+    text = builtins.readFile ./minio-root-credentials;
+  };
   # we need an SSL Certificate for minio
-
-  environment.variables = {
-    MINIO_ROOT_USER = "admin";
-    MINIO_ROOT_PASSWORD = "admin";
-  };
 }

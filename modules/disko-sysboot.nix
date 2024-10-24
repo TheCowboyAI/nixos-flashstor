@@ -10,7 +10,7 @@
     disk = {
       # this will become nixos on zfs root as well next iteration
       sysboot = {
-        device = "/dev/sda";
+        device = "/dev/sdb";
         type = "disk";
         content = {
           type = "gpt";

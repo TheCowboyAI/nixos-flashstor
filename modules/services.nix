@@ -12,5 +12,7 @@
         PasswordAuthentication = lib.mkForce true;
       };
     };
+
+    prometheus = import ./prometheus.nix
   };
 }
