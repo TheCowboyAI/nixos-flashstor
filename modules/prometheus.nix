@@ -6,7 +6,7 @@
     {
       job_name = "node";
       static_configs = [{
-        targets = [ "localhost:${toString config.services.prometheus.exporters.node.port}" ];
+        targets = [ "172.16.0.2:9000" ];
       }];
     }
   ];

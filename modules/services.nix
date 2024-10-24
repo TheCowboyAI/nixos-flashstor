@@ -13,6 +13,6 @@
       };
     };
 
-    prometheus = import ./prometheus.nix
+    prometheus = import ./prometheus.nix;
   };
 }
