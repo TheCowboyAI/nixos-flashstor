@@ -3,7 +3,7 @@ Provide reliable Network Attached Storage as a deterministic solution.
 
 ## **CAUTION** - This will destroy data
 
-If I buy more storage devices, I want to configure them prior to adding them to the network for general use.
+If I buy storage devices, I want to configure them prior to adding them to the network for general use.
 
 Having a solution to pre-configure our storage solutions and tune them specifically to our needs is important.
 
@@ -122,12 +122,17 @@ User specific settings module, root passwords, etc.
 ## minio.nix
 MinIO specific settings module
 
+This also turns into a deterministic system...
+While we can continue to use the MinIO User Interface, we have a better way to manage this deterministacally.  A Network Attached Storage device is a pretty sensitive item. It becomes a vital part of our ecosystem and we shouldn't be reconfiguring it often.
+
+Bucket management is a different thing, there are tools to help manage bucket lifecycles. We don't want to impose that here, but rest assured, you will need one.
+
 # Installation
 
 This is the tested process.
 
 1.  boot to a non-gui nixos installer image (or the iso here)
-    -  we want to avoid kexec when running nixos-anywhere
+    -  we want to avoid kexec when running nixos-anywhere, so we need a image marked as an installer
     -  to make an image, execute ```just build``` with a usb device of at least 16GB (so we can backup the 8G eMMC)
     -  we ALSO need a second device (/dev/sdb) in install to
     -  because we can't overwite a mounted drive.
